@@ -1,0 +1,178 @@
+<link href="/examinationservices.nic.in/ResultoService26/Content/cssjqryUi" rel="stylesheet" />
+
+
+
+
+<script src="/examinationservices.nic.in/ResultoService26/Scripts/jquery-3.7.1.js"></script>
+<script src="/examinationservices.nic.in/ResultoService26/Scripts/jquery-ui-1.14.1.js"></script>
+
+<script src="/examinationservices.nic.in/ResultoService26/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View QrCode</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main-content {
+            flex: 1;
+            /* This makes the content take up all available space, pushing the footer to the bottom */
+        }
+
+        .headingmain h1 {
+            font-size: 1.1em;
+            margin: 0px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .headingmain h4 {
+            font-size: 1em;
+            margin: 0px;
+            font-weight: 500;
+            padding: 3px 3px;
+            text-align: center;
+        }
+
+        .header {
+            border-bottom: 2em solid #002041;
+        }
+
+        footer {
+            color: white;
+            text-align: center;
+            background: #002041;
+            margin-top: auto;
+            /* Pushes the footer to the bottom */
+            /*  position: absolute;   // bottom: 0; padding: 10px;
+          text-align: center;*/
+        }
+
+        footer p {
+            color: #fff;
+        }
+
+        .themecolor {
+            background: #002041;
+            color: #fff;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            function captcha() {
+                $.ajax({
+                    url: "/examinationservices.nic.in/ResultoService26/Ntnt/ShowCaptchaimage.jpg",
+                    cache: false,
+                    success: function(html) {
+                        var img = document.getElementById('capimage');
+                        img.src = "/examinationservices.nic.inR/esultoService26/Ntnt/ShowCaptchaimage.jpg";
+                        img.src = "/examinationservices.nic.inR/esultoService26/Ntnt/ShowCaptchaimage.jpg" + new Date().getTime();
+                        $('#Captcha1').val('');
+                    },
+                    error: function(response) {}
+                });
+            }
+
+            $("#captcha-refresh-btn").on("click", function() {
+                captcha();
+            });
+        });
+    </script>
+    <style>
+        /* Sticky footer only for desktop screens */
+
+        @media (min-width: 792px) {
+            .footer {
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <form action="/examinationservices.nic.in/ResultoService26/Ntnt/ViewQrCode" method="post">
+        <div class="container-fluid">
+
+            <div class="row header mt-2">
+                <div class="col-md-3 col-sm-3">
+                    <img src="/examinationservices.nic.in/ResultoService26/Images/mhrdNewNeet.png" alt="logo" class="img-fluid" height="50" style="text-align:left" />
+                </div>
+                <div class="col-md-6 col-sm-6 headingmain text-center">
+                    <h1 class="text-center"> NATIONAL ELIGIBILITY CUM ENTRANCE TEST (UG) – 2026 </h1>
+                    <h1 class="text-center">Score Card</h1>
+                </div>
+                <div class="col-md-3 col-sm-3">
+                    <img src="/examinationservices.nic.in/ResultoService26/Images/NeetLogo.png" alt="logo" class="img-fluid" height="50" style="text-align:right" />
+                </div>
+            </div>
+            <div class="main-content">
+                <div class="row mt-5">
+                    <fieldset class="border p-0 w-50 m-0 m-auto">
+                        <legend class="w-100 themecolor p-1">
+                            <img src="/examinationservices.nic.in/ResultoService26/Images/login.png" class="img-fluid" style="height:1em;" /> View Result
+                        </legend>
+                        <div class="row mb-3 mt-3">
+                            <div class="col-lg-4 col-sm-4  text-end">
+                                <label class="control-label" for="Captcha1">Enter CAPTCHA </label><span class="text-success fw-bold">(case sensitive) </span> :
+                            </div>
+                            <div class="col-lg-8 col-sm-8">
+                                <input autocomplete="off" class="form-control text-box single-line" data-val="true" data-val-required="*Required" id="Captcha1" maxlength="6" minlength="6" name="Captcha1" style="" type="text" value="" />
+                                <span class="field-validation-valid text-danger" data-valmsg-for="Captcha1" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                        <div class="row mb-3 mt-3">
+                            <div class="col-lg-4 col-sm-4  text-end">
+                                <label class="control-label" for="Secpin">CAPTCHA :</label>
+                            </div>
+                            <div class="col-lg-8 col-sm-8">
+                                <img src="\examinationservices.nic.in\ResultoService26\Ntnt/ShowCaptchaimage.jpg" id="capimage" />
+                                <img src="\examinationservices.nic.in\ResultoService26\HeaderImg\Refresh.jpg" id="captcha-refresh-btn" style="cursor: pointer;" />
+                            </div>
+                        </div>
+                        <div class="row mb-3 mt-3">
+                            <div class="col-lg-4 col-sm-4"></div>
+                            <div class="col-lg-8 col-sm-8">
+                                <input type="submit" ID="Submit" Text="" class="btn btn-success" value="SUBMIT" />
+                                <span style="color:red;"> </span>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid themecolor mt-3 footer">
+            <div class="row">
+                <div class="col-lg-12">
+                    <p class="text-center mt-2">
+                        This site is designed and hosted by NIC PEP Division. The contents are provided by NTA. For any further information, please contact NTA.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </form>
+    <script src="/examinationservices.nic.in/ResultoService26/Scripts/jquery-3.6.0.js"></script>
+    <script src="/examinationservices.nic.in/ResultoService26/Scripts/jquery-3.7.1.js"></script>
+
+    <script src="/examinationservices.nic.in/ResultoService26/Scripts/jquery-ui-1.14.1.js"></script>
+
+    <script src="/examinationservices.nic.in/ResultoService26/Scripts/bootstrap.js"></script>
+
+    <link href="/examinationservices.nic.in/ResultoService26/Content/bootstrap.css" rel="stylesheet" />
+    <link href="/examinationservices.nic.in/ResultoService26/Content/jquery.datetimepicker.css" rel="stylesheet" />
+
+
+</body>
+
+</html>
