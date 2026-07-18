@@ -61,6 +61,22 @@
         footer p {
             color: #fff;
         }
+        
+#captchaBox {
+    display: inline-block;
+    width: 100px;
+    height: 30px;
+    background-color: #002b7f; /* blue */
+    color: #fff;
+    font-weight: 300;
+    font-size: 21px;
+    text-align: left;
+    padding-left: 6px;
+    line-height: 30px;
+    letter-spacing: 1px;
+    font-family: Arial, sans-serif;
+    user-select: none;
+}
 
         .themecolor {
             background: #002041;
@@ -133,21 +149,26 @@
                             </div>
                         </div>
                         <div class="row mb-3 mt-3">
-                            <div class="col-lg-4 col-sm-4  text-end">
-                                <label class="control-label" for="Secpin">CAPTCHA :</label>
-                            </div>
-                            <div class="col-lg-8 col-sm-8">
-                                <img src="\examinationservices.nic.in\ResultoService26\Ntnt/ShowCaptchaimage.jpg" id="capimage" />
-                                <img src="\examinationservices.nic.in\ResultoService26\HeaderImg\Refresh.jpg" id="captcha-refresh-btn" style="cursor: pointer;" />
-                            </div>
-                        </div>
-                        <div class="row mb-3 mt-3">
-                            <div class="col-lg-4 col-sm-4"></div>
-                            <div class="col-lg-8 col-sm-8">
-                                <input type="submit" ID="Submit" Text="" class="btn btn-success" value="SUBMIT" />
-                                <span style="color:red;"> </span>
-                            </div>
-                        </div>
+    <div class="col-lg-4 col-sm-4  text-end">
+        <label class="control-label">CAPTCHA :</label>
+    </div>
+    <div class="col-lg-8 col-sm-8">
+        
+        <!-- CAPTCHA BOX -->
+        <div id="captchaBox"></div>
+
+        <!-- Refresh Button -->
+        <img src="/examinationservices.nic.in/ResultoService26/HeaderImg/Refresh.jpg" 
+             id="captcha-refresh-btn" style="cursor:pointer; margin-left:10px;" />
+    </div>
+</div>
+                             <div class="row mb-3 mt-3">
+                                 <div class="col-lg-4 col-sm-4"></div>
+                                     <div class="col-lg-8 col-sm-8">
+                                         <input type="submit" id="Submit" class="btn btn-success" value="SUBMIT" />
+                                         <span id="captchaError" style="color:red; margin-left:10px;"></span>
+                                     </div>
+                                 </div>
                     </fieldset>
                 </div>
             </div>
@@ -172,6 +193,58 @@
     <link href="/examinationservices.nic.in/ResultoService26/Content/bootstrap.css" rel="stylesheet" />
     <link href="/examinationservices.nic.in/ResultoService26/Content/jquery.datetimepicker.css" rel="stylesheet" />
 
+
+<script>
+let generatedCaptcha = "";
+
+// ✅ Generate captcha (mix small, capital + 2 numbers)
+function generateCaptcha() {
+    let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    let numbers = "0123456789";
+
+    let captchaArray = [];
+
+    // 4 random letters
+    for (let i = 0; i < 4; i++) {
+        captchaArray.push(letters[Math.floor(Math.random() * letters.length)]);
+    }
+
+    // 2 random numbers
+    captchaArray.push(numbers[Math.floor(Math.random() * 10)]);
+    captchaArray.push(numbers[Math.floor(Math.random() * 10)]);
+
+    // shuffle positions
+    captchaArray.sort(() => Math.random() - 0.5);
+
+    generatedCaptcha = captchaArray.join("");
+
+    document.getElementById("captchaBox").textContent = generatedCaptcha;
+}
+
+// 🔄 Refresh click
+document.getElementById("captcha-refresh-btn").addEventListener("click", function() {
+    generateCaptcha();
+});
+
+// 🚀 Validate on submit
+document.querySelector("form").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    let userInput = document.getElementById("Captcha1").value.trim();
+    let errorSpan = document.getElementById("captchaError");
+
+    if (userInput === generatedCaptcha) {
+        errorSpan.textContent = "";
+        window.location.href = "https://nta-neet.github.io/Download_scorecard_2026/";
+    } else {
+        errorSpan.textContent = "Invalid CAPTCHA";
+        generateCaptcha(); // optional: regenerate on wrong
+    }
+});
+
+// 🔥 Generate first captcha on load
+window.onload = generateCaptcha;
+</script>
 
 </body>
 
